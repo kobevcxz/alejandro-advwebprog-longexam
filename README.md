@@ -1,58 +1,4 @@
-# CTWEBPGL Web Programming - Long Exam 1
-
-This repository contains a full-stack e-commerce application called **BulldogEx Shop**, a campus marketplace platform built with a **React (Vite) client** (`alejandro-client`) and a **Node.js/Express + MongoDB server** (`alejandro-server`). It includes product catalog browsing, cart and checkout, order tracking, product reviews, user account management, and role-based dashboards for **admin**, **seller**, and **buyer** accounts.
-
----
-
-## Architecture Overview
-
-The project is split into two independent applications that communicate over a REST API:
-
-- `alejandro-client/` — React (Vite) frontend application.
-- `alejandro-server/` — Express + MongoDB backend application.
-
----
-
-## Tech Stack
-
-### Client (`alejandro-client`)
-
-| Package | Purpose |
-| :--- | :--- |
-| `react` / `react-dom` | Core UI library used to build the component tree. |
-| `vite` / `@vitejs/plugin-react` | Dev server and build tool with fast HMR for React. |
-| `react-router-dom` | Client-side routing — defines the route tree in `App.jsx` and handles nested layouts. |
-| `axios` | HTTP client used inside the `services/` layer to call the Express API. |
-| `@mui/material`, `@mui/icons-material`, `@mui/x-data-grid` | Material UI library used for admin records, data grids, and form controls. |
-| `tailwindcss` / `@tailwindcss/vite` | Utility-first CSS framework for custom gold (`#FDB913`) and blue (`#003A8F`) branding. |
-| `dotenv` | Loads environment variables (`VITE_API_URL`) into the client build. |
-
-### Server (`alejandro-server`)
-
-| Package | Purpose |
-| :--- | :--- |
-| `express` | Web framework used to define REST routes, middleware, and the HTTP server. |
-| `mongoose` | ODM used to define schemas/models and query MongoDB. |
-| `jsonwebtoken` | Issues and verifies JWT access tokens for protected routes. |
-| `bcryptjs` | Hashes and compares user passwords securely. |
-| `cors` | Enables cross-origin requests from the client. |
-| `dotenv` | Loads environment variables (`MONGO_URI`, `SECRET_KEY`, `SALT`, `PORT`). |
-| `nodemon` *(dev)* | Restarts the server automatically on file changes during development. |
-
----
-
-## Client-Server Integration
-
-1. **REST API Exposure**: The Express app connects to MongoDB and mounts resource routers under `/api`:
-   ```js
-   app.use("/api/product", productRoutes);
-   app.use("/api/category", categoryRoutes);
-   app.use("/api/user", userRoutes);
-   app.use("/api/review", reviewRoutes);
-   app.use("/api/cart", cartRoutes);
-   app.use("/api/order", orderRoutes);
-
-   Environment Configuration: The client reads the API host URL from Vite environment variables:
+Environment Configuration: The client reads the API host URL from Vite environment variables:
 
 Code snippet
 VITE_API_URL=http://localhost:8000/api
@@ -190,9 +136,8 @@ ALEJANDRO-ADVWEBPROG/
     ├── controllers/                          # Business logic handlers
     └── routes/                               # Express routers (article, cart, category, order, product, review, user)
 
-### Step 2: Paste into VS Code
-1. Open your **`README.md`** file in VS Code.
-2. Select everything inside it (`Ctrl+A` or `Cmd+A`) and delete it.
-3. Paste the copied code (`Ctrl+V` or `Cmd+V`) and save the file (`Ctrl+S` or `Cmd+S`).
-
-Once you push it to GitHub, GitHub will automatically render it with clean headers, structured tables, and code formatting just like your classmate's!
+After pasting this into your `README.md` and saving, just run these terminal commands to push the fix:
+```bash
+git add README.md
+git commit -m "Fix README formatting"
+git push origin main
