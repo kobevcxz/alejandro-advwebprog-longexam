@@ -321,80 +321,80 @@ This separation makes the server structure more organized and keeps routing, dat
 
 alejandro-advwebprog/
 ├── README.md
-├── alejandro-client/
-│   ├── .gitignore
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── vite.config.js
-│   ├── public/
-│   │   ├── favicon.svg
-│   │   └── icons.svg
-│   └── src/
-│       ├── App.jsx
-│       ├── constants.js
-│       ├── main.jsx
-│       ├── assets/
-│       │   ├── hero.png
-│       │   ├── product-content.js
-│       │   ├── react.svg
-│       │   ├── vite.svg
-│       │   ├── img/
-│       │   │   ├── idk.jpg
-│       │   │   ├── nu_bulldogex_banner.jpg
-│       │   │   ├── nu_cap.png
-│       │   │   ├── nu_champ_shirt.png
-│       │   │   ├── nu_classic_v2_sticker.png
-│       │   │   ├── nu_keychain.png
-│       │   │   ├── nu_lanyard.png
-│       │   │   ├── nu_v1_scarf.png
-│       │   │   ├── nu_varsity_jacket.png
-│       │   │   ├── nu_volleyball_sticker.png
-│       │   │   ├── nubdexchange_logo.png
-│       │   │   └── signInn.jpg
-│       │   └── styles/
-│       │       └── index.css
-│       ├── components/
-│       │   ├── Button.jsx
-│       │   ├── Footer.jsx
-│       │   ├── NavBar.jsx
-│       │   ├── ProductCard.jsx
-│       │   ├── ProductList.jsx
-│       │   └── ProtectedRoute.jsx
-│       ├── context/
-│       │   └── AuthContext.jsx
-│       ├── layouts/
-│       │   ├── AuthLayout.jsx
-│       │   ├── DashLayout.jsx
-│       │   └── Layout.jsx
-│       ├── pages/
-│       │   ├── NotFoundPage.jsx
-│       │   ├── AuthPages/
-│       │   │   ├── SignInPage.jsx
-│       │   │   └── SignUpPage.jsx
-│       │   ├── DashboardPages/
-│       │   │   ├── DashboardPage.jsx
-│       │   │   ├── DashOrderListPage.jsx
-│       │   │   ├── DashProductListPage.jsx
-│       │   │   ├── DashReviewPage.jsx
-│       │   │   ├── ReportsPage.jsx
-│       │   │   └── UsersPage.jsx
-│       │   └── LandingPages/
-│       │       ├── AboutPage.jsx
-│       │       ├── AccountPage.jsx
-│       │       ├── CartPage.jsx
-│       │       ├── HomePage.jsx
-│       │       ├── OrderPage.jsx
-│       │       ├── ProductListPage.jsx
-│       │       ├── ProductPage.jsx
-│       │       └── ReviewPage.jsx
-│       └── services/
-│           ├── CartService.js
-│           ├── OrderService.js
-│           ├── ProductService.js
-│           ├── ReviewService.js
-│           └── UserService.js
+└── alejandro-client/
+    ├── .gitignore
+    ├── eslint.config.js
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── vite.config.js
+    ├── public/
+    │   ├── favicon.svg
+    │   └── icons.svg
+    └── src/
+        ├── App.jsx
+        ├── constants.js
+        ├── main.jsx
+        ├── assets/
+        │   ├── hero.png
+        │   ├── product-content.js
+        │   ├── react.svg
+        │   ├── vite.svg
+        │   ├── img/
+        │   │   ├── idk.jpg
+        │   │   ├── nu_bulldogex_banner.jpg
+        │   │   ├── nu_cap.png
+        │   │   ├── nu_champ_shirt.png
+        │   │   ├── nu_classic_v2_sticker.png
+        │   │   ├── nu_keychain.png
+        │   │   ├── nu_lanyard.png
+        │   │   ├── nu_v1_scarf.png
+        │   │   ├── nu_varsity_jacket.png
+        │   │   ├── nu_volleyball_sticker.png
+        │   │   ├── nubdexchange_logo.png
+        │   │   └── signInn.jpg
+        │   └── styles/
+        │       └── index.css
+        ├── components/
+        │   ├── Button.jsx
+        │   ├── Footer.jsx
+        │   ├── NavBar.jsx
+        │   ├── ProductCard.jsx
+        │   ├── ProductList.jsx
+        │   └── ProtectedRoute.jsx
+        ├── context/
+        │   └── AuthContext.jsx
+        ├── layouts/
+        │   ├── AuthLayout.jsx
+        │   ├── DashLayout.jsx
+        │   └── Layout.jsx
+        ├── pages/
+        │   ├── NotFoundPage.jsx
+        │   ├── AuthPages/
+        │   │   ├── SignInPage.jsx
+        │   │   └── SignUpPage.jsx
+        │   ├── DashboardPages/
+        │   │   ├── DashboardPage.jsx
+        │   │   ├── DashOrderListPage.jsx
+        │   │   ├── DashProductListPage.jsx
+        │   │   ├── DashReviewPage.jsx
+        │   │   ├── ReportsPage.jsx
+        │   │   └── UsersPage.jsx
+        │   └── LandingPages/
+        │       ├── AboutPage.jsx
+        │       ├── AccountPage.jsx
+        │       ├── CartPage.jsx
+        │       ├── HomePage.jsx
+        │       ├── OrderPage.jsx
+        │       ├── ProductListPage.jsx
+        │       ├── ProductPage.jsx
+        │       └── ReviewPage.jsx
+        └── services/
+            ├── CartService.js
+            ├── OrderService.js
+            ├── ProductService.js
+            ├── ReviewService.js
+            └── UserService.js
 
 ---
 
