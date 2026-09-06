@@ -124,12 +124,8 @@ ALEJANDRO-ADVWEBPROG/
     ├── controllers/                          # Business logic route handlers
     └── routes/                               # Express routers (article, cart, category, order, product, review, user)
 
-<<<<<<< HEAD
-    cd alejandro-server
-npm install
-
-=======
-## Project Setup & Installation
+    
+## 7. Project Setup & Installation
 
 ### Server Setup
 
@@ -145,7 +141,6 @@ SECRET_KEY=<your-jwt-secret>
 SALT=10
 PORT=8000
 
-<<<<<<< HEAD
 npm run dev
 
 cd alejandro-client
@@ -155,7 +150,6 @@ VITE_API_URL=http://localhost:8000/api
 
 npm run dev
 
-=======
 Run the development server:
 npm run dev
 
