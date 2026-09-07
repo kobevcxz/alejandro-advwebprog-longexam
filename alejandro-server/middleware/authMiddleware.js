@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { SECRET_KEY } = require("../config/config");
 const { HttpStatus } = require("../config/constants");
 
 module.exports = (req, res, next) => {
@@ -13,9 +12,9 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        req.user = jwt.verify(token, SECRET_KEY);
+        req.user = jwt.verify(token, process.env.JWT_SECRET);
         next();
-    } catch {
+    } catch (error) {
         return res.status(HttpStatus.UNAUTHORIZED).json({
             success: false,
             message: "Invalid or expired token",

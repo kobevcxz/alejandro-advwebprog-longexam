@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const articleRoutes = require("./routes/articleRoutes");
-const productRoutes = require("./routes/productRoutes");
+const productRoutes = require("./routes/V1/productRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const cartRoutes = require("./routes/cartRoutes");
@@ -49,9 +49,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Backend is running!" });
 });
 
-app.use("/api/users", userRoutes);
+app.use("/api/V1/users", userRoutes);
 app.use("/api/articles", articleRoutes);
-app.use("/api/v1/products", productRoutes);
+app.use("/api/V1/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/cart", cartRoutes);

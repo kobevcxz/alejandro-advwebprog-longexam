@@ -12,6 +12,32 @@ const getUsers = async (req, res) => {
     }
 };
 
+const getUserById = async (req, res) => {
+    try {
+        // Enforce Self-Ownership and Admin override rule for viewing profiles
+        const isAuthorizedAdmin = req.user.role === 'Admin';
+        const isSelf = req.user.id.toString() === req.params.id.toString();
+
+        if (!isAuthorizedAdmin && !isSelf) {
+            return res.status(HttpStatus.FORBIDDEN).json({
+                success: false,
+                message: "Access denied. You can only view your own account."
+            });
+        }
+
+        const user = await User.findById(req.params.id, '-password');
+        if (!user) {
+            return res.status(HttpStatus.NOT_FOUND).json({ 
+                success: false, 
+                message: "User not found" 
+            });
+        }
+        res.status(HttpStatus.OK).json({ success: true, user });
+    } catch (error) {
+        res.status(HttpStatus.BAD_REQUEST).json({ success: false, message: error.message });
+    }
+};
+
 const createUser = async (req, res) => {
     try {
         if (!req.body.password) {
@@ -49,15 +75,43 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
+        // Enforce Self-Ownership and Admin override rule
+        // Converts to strings to ensure type consistency (e.g., matching ObjectId with string token payload)
+        const isAuthorizedAdmin = req.user.role === 'Admin';
+        const isSelfUpdate = req.user.id.toString() === req.params.id.toString();
+
+        if (!isAuthorizedAdmin && !isSelfUpdate) {
+            return res.status(HttpStatus.FORBIDDEN).json({
+                success: false,
+                message: "Access denied. You can only update your own account."
+            });
+        }
+
         if (req.body.password) {
             req.body.password = await bcrypt.hash(req.body.password, 10);
         }
 
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { 
+            new: true, 
+            select: '-password' 
+        });
 
-        res.status(HttpStatus.OK).json(user);
+        if (!user) {
+            return res.status(HttpStatus.NOT_FOUND).json({ 
+                success: false, 
+                message: "User not found" 
+            });
+        }
+
+        res.status(HttpStatus.OK).json({ 
+            success: true, 
+            user 
+        });
     } catch (error) {
-        res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
+        res.status(HttpStatus.BAD_REQUEST).json({ 
+            success: false, 
+            message: error.message 
+        });
     }
 };
 
@@ -83,7 +137,7 @@ const loginUser = async (req, res) => {
             return res.status(HttpStatus.FORBIDDEN).json({ message: 'Your account is inactive. Please contact support.' });
         }
 
-        if (user.type === 'Viewer') {
+        if (user.role === 'Viewer') {
             return res.status(HttpStatus.FORBIDDEN).json({
                 message: 'Viewer accounts cannot log in.'
             });
@@ -95,7 +149,7 @@ const loginUser = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: user._id, email: user.email, type: user.type }, 
+            { id: user._id, email: user.email, role: user.role }, 
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );
@@ -103,7 +157,7 @@ const loginUser = async (req, res) => {
         res.status(HttpStatus.OK).json({ 
             message: 'Login successful', 
             token, 
-            type: user.type, 
+            role: user.role, 
             firstName: user.firstName 
         }); 
     } catch (error) {
@@ -111,4 +165,4 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = { getUsers, createUser, updateUser, deleteUser, loginUser };
+module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser, loginUser };
