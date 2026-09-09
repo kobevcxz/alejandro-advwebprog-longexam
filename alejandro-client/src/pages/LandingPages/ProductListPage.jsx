@@ -77,7 +77,7 @@ const ProductListPage = () => {
                 className="flex flex-col justify-between rounded-3xl border border-zinc-200 bg-white p-4 shadow-2xs hover:border-[#003A8F]/50 transition duration-300"
               >
                 <div>
-                  <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200">
+                  <div className="aspect-4/3 w-full overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200">
                     <img
                       src={imageUrl}
                       alt={product?.productName || product?.name}

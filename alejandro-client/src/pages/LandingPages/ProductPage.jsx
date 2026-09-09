@@ -22,7 +22,6 @@ function ProductPage() {
   const [error, setError] = useState('');
   const [reviewError, setReviewError] = useState('');
 
-  // Bulletproof user ID resolver that decodes straight from the JWT token if needed
   const getUserId = () => {
     if (user?.id) return user.id;
     if (user?._id) return user._id;
@@ -171,12 +170,10 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* Product Display & Details Section */}
       <section className="grid lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left: Product Image */}
         <div className="lg:col-span-6 rounded-3xl border-2 border-[#003A8F] bg-white p-6 shadow-sm">
-          <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200 relative">
+          <div className="aspect-4/3 w-full overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200 relative">
             <img
               src={image}
               alt={product.productName || product.title}
@@ -189,7 +186,6 @@ function ProductPage() {
           </div>
         </div>
 
-        {/* Right: Description & Add to Cart Action */}
         <div className="lg:col-span-6 rounded-3xl border-2 border-[#003A8F] bg-white p-6 sm:p-8 shadow-sm space-y-6">
           <div>
             <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Product Description</h2>
@@ -220,7 +216,6 @@ function ProductPage() {
         </div>
       </section>
 
-      {/* Reviews Section */}
       <section className="rounded-3xl border-2 border-[#003A8F] bg-white p-6 sm:p-8 shadow-sm">
         <h2 className="text-xl font-bold text-zinc-900 border-b border-zinc-100 pb-4">
           Customer Reviews
@@ -256,7 +251,6 @@ function ProductPage() {
         )}
       </section>
 
-      {/* Seller Information Section */}
       <section className="rounded-3xl border-2 border-[#003A8F] bg-white p-6 sm:p-8 shadow-sm flex items-center gap-4">
         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#003A8F]/10 text-[#003A8F] border border-blue-100">
           <PersonOutlineOutlinedIcon fontSize="medium" />

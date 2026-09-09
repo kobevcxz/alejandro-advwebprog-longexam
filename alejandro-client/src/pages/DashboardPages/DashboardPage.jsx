@@ -12,10 +12,13 @@ const DashboardPage = () => {
   const loadDashboardData = async () => {
     try {
       setLoading(true);
-      // Fetch products, users, orders concurrently from your backend port 8000
+
+      const token = localStorage.getItem('token');
+      const authHeader = { headers: { Authorization: `Bearer ${token}` } };
+
       const [productsRes, usersRes, ordersRes] = await Promise.all([
         axios.get('http://localhost:8000/api/products').catch(() => ({ data: [] })),
-        axios.get('http://localhost:8000/api/users').catch(() => ({ data: [] })),
+        axios.get('http://localhost:8000/api/users', authHeader).catch(() => ({ data: [] })),
         axios.get('http://localhost:8000/api/orders').catch(() => ({ data: [] })),
       ]);
 
@@ -108,15 +111,12 @@ const DashboardPage = () => {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
-      {/* Header Banner */}
       <div className="bg-white p-6 rounded-2xl border border-zinc-200 shadow-2xs">
         <h1 className="text-xl font-bold tracking-tight text-zinc-900">Dashboard Overview</h1>
         <p className="text-sm text-zinc-500 mt-0.5">Welcome back! Here is a summary of BulldogEx Shop performance.</p>
       </div>
 
-      {/* Metric Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Total Revenue */}
         <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Total Revenue</span>
@@ -130,7 +130,6 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Total Orders */}
         <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Total Orders</span>
@@ -144,7 +143,6 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Total Products */}
         <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Total Products</span>
@@ -158,7 +156,6 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Total Users */}
         <div className="bg-white p-5 rounded-2xl border border-zinc-200 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Total Users</span>
@@ -173,7 +170,6 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      {/* Search Toolbar */}
       <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-zinc-200 shadow-2xs">
         <TextField
           size="small"
@@ -185,7 +181,6 @@ const DashboardPage = () => {
         <div className="text-xs font-semibold text-zinc-400">Recent Activity Feed</div>
       </div>
 
-      {/* Data Table */}
       <div className="bg-white border border-zinc-200 rounded-2xl shadow-2xs overflow-hidden">
         <div className="px-6 py-4 border-b border-zinc-100 flex items-center justify-between">
           <h3 className="font-bold text-zinc-900 text-sm">Recent Orders</h3>

@@ -1,7 +1,7 @@
 import Button from './Button';
 import placeholderImage from '../assets/img/placeholder-product.png';
 
-const ProductCard = ({ product, index }) => {
+const ProductCard = ({ product }) => {
   const numericPrice = Number(product.price);
 
   const formattedPrice = Number.isFinite(numericPrice)
@@ -14,13 +14,13 @@ const ProductCard = ({ product, index }) => {
     <article className="rounded-3xl border-2 border-zinc-900 bg-zinc-100 p-4 flex flex-col">
       <div className="overflow-hidden rounded-[1.25rem]">
         <img 
-            src={product.image || product.images?.[0]} 
-            alt={product.title || product.productName} 
-            onError={(event) => {
-              event.currentTarget.onerror = null;
-              event.currentTarget.src = placeholderImage;
+          src={product.image || product.images?.[0]} 
+          alt={product.title || product.productName} 
+          onError={(event) => {
+            event.currentTarget.onerror = null;
+            event.currentTarget.src = placeholderImage;
           }}
-          className="aspect-[4/3] w-full object-cover" 
+          className="aspect-4/3 w-full object-cover"
         />
       </div>
       

@@ -8,16 +8,15 @@ const AboutPage = () => {
   return (
     <div className="flex w-full flex-col gap-6 font-lexend pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-6">
       
-      {/* Hero Banner Section */}
-      <section className="relative min-h-[26rem] overflow-hidden rounded-3xl border-2 border-[#003A8F] bg-zinc-900 px-6 py-12 sm:px-10 shadow-sm flex items-center">
+      <section className="relative min-h-104 overflow-hidden rounded-3xl border-2 border-[#003A8F] bg-zinc-900 px-6 py-12 sm:px-10 shadow-sm flex items-center">
         <img
           src={banner}
           alt="BulldogEx Banner"
           className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-zinc-950/90 via-zinc-950/60 to-transparent" />
 
-        <div className="relative z-10 flex max-w-xl flex-col justify-center min-h-[16rem]">
+        <div className="relative z-10 flex max-w-xl flex-col justify-center min-h-64">
           <span className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#FDB913] bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20 w-fit">
             About BulldogEx
           </span>
@@ -35,7 +34,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Mission & Vision Cards */}
       <section className="grid gap-6 md:grid-cols-2">
         <div className="rounded-3xl border-2 border-[#003A8F] bg-white p-6 sm:p-8 shadow-2xs relative overflow-hidden">
           <div className="absolute top-0 right-0 w-24 h-24 bg-[#003A8F]/5 rounded-full blur-xl pointer-events-none" />
@@ -64,7 +62,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Features Overview */}
       <section className="rounded-3xl border-2 border-[#003A8F] bg-white p-6 sm:p-8 shadow-sm">
         <div className="mb-6">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#003A8F]">

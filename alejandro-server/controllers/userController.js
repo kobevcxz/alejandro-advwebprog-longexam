@@ -6,7 +6,7 @@ const { HttpStatus } = require("../config/constants");
 const getUsers = async (req, res) => {
     try {
         const users = await User.find({}, '-password');
-        res.status(HttpStatus.OK).json({ users });
+        res.status(HttpStatus.OK).json(users); 
     } catch (error) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: error.message });
     }
@@ -14,7 +14,6 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        // Enforce Self-Ownership and Admin override rule for viewing profiles
         const isAuthorizedAdmin = req.user.role === 'Admin';
         const isSelf = req.user.id.toString() === req.params.id.toString();
 
@@ -32,6 +31,7 @@ const getUserById = async (req, res) => {
                 message: "User not found" 
             });
         }
+
         res.status(HttpStatus.OK).json({ success: true, user });
     } catch (error) {
         res.status(HttpStatus.BAD_REQUEST).json({ success: false, message: error.message });
@@ -75,8 +75,6 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        // Enforce Self-Ownership and Admin override rule
-        // Converts to strings to ensure type consistency (e.g., matching ObjectId with string token payload)
         const isAuthorizedAdmin = req.user.role === 'Admin';
         const isSelfUpdate = req.user.id.toString() === req.params.id.toString();
 

@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
     res.json({ message: "Backend is running!" });
 });
 
-app.use("/api/V1/users", userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/articles", articleRoutes);
 app.use("/api/V1/products", productRoutes);
 app.use("/api/categories", categoryRoutes);

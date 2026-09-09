@@ -1,19 +1,17 @@
 import React from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; 
 
 const DashLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, logout } = useAuth(); 
 
-  // Retrieve logged-in user profile safely from localStorage
-  const storedUser = localStorage.getItem('user');
-  const user = storedUser ? JSON.parse(storedUser) : null;
   const userName = user ? `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.username : 'Admin';
   const userInitials = userName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    logout();                  
     navigate('/auth/signin');
   };
 
@@ -59,12 +57,13 @@ const DashLayout = () => {
     },
   ];
 
+  const userRole = user?.role?.toLowerCase() || user?.type?.toLowerCase();
+  const isAdmin = userRole === 'admin';
+
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-zinc-50 font-sans">
-      {/* Sidebar Navigation */}
       <aside className="w-64 bg-white border-r border-zinc-200 flex flex-col justify-between z-20 shadow-xs">
         <div>
-          {/* Brand Header */}
           <div className="h-16 flex items-center px-6 gap-3 border-b border-zinc-100">
             <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-sm">
               B
@@ -72,7 +71,6 @@ const DashLayout = () => {
             <span className="font-bold text-zinc-900 tracking-tight">BulldogEx Shop</span>
           </div>
 
-          {/* Navigation Sections */}
           <div className="p-4 space-y-6">
             <div>
               <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-2">Main Menu</p>
@@ -97,8 +95,7 @@ const DashLayout = () => {
               </nav>
             </div>
 
-            {/* Render Administration Section only if user is admin */}
-            {user?.role === 'admin' && (
+            {isAdmin && (
               <div>
                 <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-2">Administration</p>
                 <nav className="space-y-1">
@@ -125,7 +122,6 @@ const DashLayout = () => {
           </div>
         </div>
 
-        {/* Sidebar Footer Logout */}
         <div className="p-4 border-t border-zinc-100">
           <button
             onClick={handleLogout}
@@ -139,12 +135,9 @@ const DashLayout = () => {
         </div>
       </aside>
 
-      {/* Main Workspace Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        {/* Top Header Bar */}
         <header className="h-16 bg-white border-b border-zinc-200 flex items-center justify-between px-8 z-10 shadow-2xs">
           <div className="text-sm font-medium text-zinc-600">
-            {/* Optional breadcrumb or page context */}
           </div>
 
           <div className="flex items-center gap-3">
@@ -158,7 +151,6 @@ const DashLayout = () => {
           </div>
         </header>
 
-        {/* Dynamic Nested Content Outlet */}
         <main className="flex-1 overflow-y-auto p-8 bg-zinc-50/50">
           <Outlet />
         </main>

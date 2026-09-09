@@ -9,7 +9,6 @@ export function AuthProvider({ children }) {
   });
 
   const login = (userData, token) => {
-    // Normalize user data so user.role works even if backend returns user.type
     const normalizedUser = {
       ...userData,
       id: userData.id || userData._id,
@@ -26,6 +25,8 @@ export function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('role');
+    localStorage.removeItem('firstName');
     setUser(null);
   };
 

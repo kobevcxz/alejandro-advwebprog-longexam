@@ -33,7 +33,6 @@ const HomePage = () => {
                 const productData = productResponse?.data?.data || [];
                 setFeaturedProducts(productData.slice(0, 4));
 
-                // Calculate unique categories count from products list
                 const uniqueCategories = new Set(
                     productData.map((p) => 
                         typeof p.category === 'object' && p.category !== null 
@@ -60,14 +59,13 @@ const HomePage = () => {
     return (
         <div className="flex w-full flex-col gap-6 font-lexend pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-6">
             
-            {/* Hero Banner Section */}
-            <section className="relative min-h-[30rem] overflow-hidden rounded-3xl border-2 border-[#003A8F] bg-zinc-900 px-4 py-12 sm:px-8 lg:px-12 shadow-sm flex items-center">
+            <section className="relative min-h-120 overflow-hidden rounded-3xl border-2 border-[#003A8F] bg-zinc-900 px-4 py-12 sm:px-8 lg:px-12 shadow-sm flex items-center">
                 <img
                     src={banner}
                     alt="BulldogEx Banner"
                     className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/60 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-r from-zinc-950/90 via-zinc-950/60 to-transparent" />
 
                 <div className="relative z-10 max-w-xl text-left">
                     <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#FDB913]">
@@ -90,7 +88,6 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* Value Proposition Badges */}
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex items-center gap-4 rounded-3xl border border-zinc-200 bg-white p-6 shadow-2xs">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-[#003A8F] border border-blue-100">
@@ -123,7 +120,6 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* Store Overview Stats Section */}
             <section className="border-y-2 border-[#003A8F] bg-white px-6 py-8 rounded-3xl shadow-2xs">
                 <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
@@ -145,6 +141,7 @@ const HomePage = () => {
                         </div>
                         <ShoppingBagOutlinedIcon fontSize="large" className="text-[#FDB913]/30" />
                     </div>
+
                     <div className="rounded-2xl border-2 border-[#003A8F] bg-[#003A8F] p-6 text-white shadow-sm flex items-center justify-between">
                         <div>
                             <p className="text-3xl font-bold text-[#FDB913]">{formatNum(stats.categories)}</p>
@@ -154,6 +151,7 @@ const HomePage = () => {
                         </div>
                         <div className="h-8 w-8 rounded-full bg-[#FDB913]/20 flex items-center justify-center text-[#FDB913] font-bold">#</div>
                     </div>
+
                     <div className="rounded-2xl border-2 border-[#003A8F] bg-[#003A8F] p-6 text-white shadow-sm flex items-center justify-between">
                         <div>
                             <p className="text-3xl font-bold text-[#FDB913]">{formatNum(stats.orders)}</p>
@@ -166,7 +164,6 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* Featured / Trending Products Section */}
             {featuredProducts.length > 0 && (
                 <section className="border-y-2 border-[#003A8F] bg-white px-6 py-8 rounded-3xl shadow-2xs space-y-6">
                     <div className="flex items-center justify-between">
