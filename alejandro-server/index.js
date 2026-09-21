@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
@@ -11,10 +12,29 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
+const { auditLoggerMiddleware } = require("./middleware/auditLoggerMiddleware");
 
 const app = express();
 
 connectDB();
+
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:", "blob:"],
+            connectSrc: ["'self'"],
+            fontSrc: ["'self'", "data:"],
+            objectSrc: ["'none'"],
+            frameAncestors: ["'none'"],
+            upgradeInsecureRequests: [],
+        },
+    },
+    frameguard: { action: "sameorigin" },
+    referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+}));
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -44,6 +64,8 @@ app.use((req, res, next) => {
     );
     next();
 });
+
+app.use(auditLoggerMiddleware);
 
 app.get("/", (req, res) => {
     res.json({ message: "Backend is running!" });

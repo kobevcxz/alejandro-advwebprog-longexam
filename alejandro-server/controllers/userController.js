@@ -2,6 +2,10 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { HttpStatus } = require("../config/constants");
+const {
+    recordFailedLogin,
+    resetFailedLogin
+} = require('../middleware/rateLimiterMiddleware');
 
 const getUsers = async (req, res) => {
     try {
@@ -127,12 +131,20 @@ const loginUser = async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
+
         if (!user) {
-            return res.status(HttpStatus.NOT_FOUND).json({ message: 'User not found' });
+            const failed = recordFailedLogin(email);
+
+            return res.status(HttpStatus.NOT_FOUND).json({
+                message: 'User not found',
+                failedAttempts: failed.attempts
+            });
         }
 
         if (!user.isActive) {
-            return res.status(HttpStatus.FORBIDDEN).json({ message: 'Your account is inactive. Please contact support.' });
+            return res.status(HttpStatus.FORBIDDEN).json({
+                message: 'Your account is inactive. Please contact support.'
+            });
         }
 
         if (user.role === 'Viewer') {
@@ -142,9 +154,17 @@ const loginUser = async (req, res) => {
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
+
         if (!isPasswordValid) {
-            return res.status(HttpStatus.UNAUTHORIZED).json({ message: 'Invalid credentials' });
+            const failed = recordFailedLogin(email);
+
+            return res.status(HttpStatus.UNAUTHORIZED).json({
+                message: 'Invalid credentials',
+                failedAttempts: failed.attempts
+            });
         }
+
+        resetFailedLogin(email);
 
         const token = jwt.sign(
             { id: user._id, email: user.email, role: user.role }, 

@@ -1,12 +1,29 @@
 const express = require('express');
+
 const { getUsers, getUserById, createUser, updateUser, deleteUser, loginUser } = require('../controllers/userController');
+
 const verifyToken = require('../middleware/authMiddleware');
+
 const verifyRole = require('../middleware/authorization');
+
+const { registerValidation, loginValidation } = require('../middleware/validationMiddleware');
+
+const {
+    loginLimiter,
+    progressiveLoginLimiter
+} = require('../middleware/rateLimiterMiddleware');
 
 const router = express.Router();
 
-router.post('/login', loginUser);
-router.route('/').post(createUser);
+router.post(
+    '/login',
+    progressiveLoginLimiter,
+    loginLimiter,
+    loginValidation,
+    loginUser
+);
+
+router.route('/').post(registerValidation, createUser);
 
 router.route('/').get(verifyToken, verifyRole('Admin'), getUsers);
 
