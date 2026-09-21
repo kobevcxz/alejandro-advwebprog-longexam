@@ -7,7 +7,7 @@ import AboutPage from './pages/LandingPages/AboutPage';
 import ProductListPage from './pages/LandingPages/ProductListPage';
 import CartPage from './pages/LandingPages/CartPage';
 import AccountPage from './pages/LandingPages/AccountPage';
-import OrderPage from './pages/LandingPages/OrderPage'; // <-- 1. IMPORT YOUR ORDER PAGE HERE
+import OrderPage from './pages/LandingPages/OrderPage';
 import ReviewPage from './pages/LandingPages/ReviewPage';
 
 import AuthLayout from './layouts/AuthLayout';
@@ -38,7 +38,7 @@ const routes = [
       { path: 'cart', element: <CartPage /> },
       { path: 'account', element: <AccountPage /> },
       { path: 'profile', element: <AccountPage /> },
-      { path: 'orders', element: <OrderPage /> }, // <-- 2. ADD THE /orders ROUTE HERE
+      { path: 'orders', element: <OrderPage /> },
       { path: 'reviews', element: <ReviewPage /> },
     ],
   },
