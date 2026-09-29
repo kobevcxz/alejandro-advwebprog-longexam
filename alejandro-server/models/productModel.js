@@ -16,7 +16,14 @@ const productSchema = new mongoose.Schema(
             type: Number,
             default: 0
         },
-        images: [String],
+        images: {
+            type: [String],
+            default: []
+        },
+        imagePublicIds: {
+            type: [String],
+            default: []
+        },
         seller: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
@@ -35,10 +42,12 @@ const productSchema = new mongoose.Schema(
             enum: ["Available", "Sold"],
             default: "Available"
         },
-        reviews: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Review"
-        }],
+        reviews: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Review"
+            }
+        ]
     },
     {
         timestamps: true
