@@ -97,7 +97,7 @@ const ReviewPage = () => {
         let historyItems = [];
 
         try {
-          const reviewsResponse = await axios.get('http://localhost:8000/api/reviews', { headers });
+          const reviewsResponse = await axios.get('https://alejandro-advwebprog-longexam.vercel.app/api/reviews', { headers });
           const allReviews = reviewsResponse.data?.data || reviewsResponse.data?.reviews || reviewsResponse.data || [];
           
           if (Array.isArray(allReviews)) {
@@ -169,7 +169,7 @@ const ReviewPage = () => {
       };
 
       // Post review to backend so DashReviewPage captures it
-      await axios.post('http://localhost:8000/api/reviews', payload, {
+      await axios.post('https://alejandro-advwebprog-longexam.vercel.app/api/reviews', payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

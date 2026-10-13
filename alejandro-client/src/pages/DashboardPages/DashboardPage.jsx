@@ -17,9 +17,9 @@ const DashboardPage = () => {
       const authHeader = { headers: { Authorization: `Bearer ${token}` } };
 
       const [productsRes, usersRes, ordersRes] = await Promise.all([
-        axios.get('http://localhost:8000/api/products').catch(() => ({ data: [] })),
-        axios.get('http://localhost:8000/api/users', authHeader).catch(() => ({ data: [] })),
-        axios.get('http://localhost:8000/api/orders').catch(() => ({ data: [] })),
+        axios.get('https://alejandro-advwebprog-longexam.vercel.app/api/products').catch(() => ({ data: [] })),
+        axios.get('https://alejandro-advwebprog-longexam.vercel.app/api/users', authHeader).catch(() => ({ data: [] })),
+        axios.get('https://alejandro-advwebprog-longexam.vercel.app/api/orders').catch(() => ({ data: [] })),
       ]);
 
       const products = Array.isArray(productsRes.data) ? productsRes.data : (productsRes.data?.data || productsRes.data?.products || []);

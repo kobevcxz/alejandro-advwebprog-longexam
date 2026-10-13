@@ -29,7 +29,7 @@ const DashReviewPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/reviews', {
+      const response = await axios.get('https://alejandro-advwebprog-longexam.vercel.app/api/reviews', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const rawData = response?.data;
@@ -65,7 +65,7 @@ const DashReviewPage = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:8000/api/reviews/${editReviewId}`,
+        `https://alejandro-advwebprog-longexam.vercel.app/api/reviews/${editReviewId}`,
         {
           rating: Number(editForm.rating),
           comment: editForm.comment,

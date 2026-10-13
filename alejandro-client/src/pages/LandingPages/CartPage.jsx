@@ -194,7 +194,7 @@ const CartPage = () => {
 
       const token = localStorage.getItem('token');
       // Directly call orders endpoint with auth headers
-      await axios.post('http://localhost:8000/api/orders', payload, {
+      await axios.post('https://alejandro-advwebprog-longexam.vercel.app/api/orders', payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

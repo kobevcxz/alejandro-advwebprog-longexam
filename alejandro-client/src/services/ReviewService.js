@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api/reviews';
+const API_URL = 'https://alejandro-advwebprog-longexam.vercel.app/api/reviews';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');

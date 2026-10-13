@@ -22,7 +22,7 @@ const DashOrderListPage = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:8000/api/orders', {
+      const response = await axios.get('https://alejandro-advwebprog-longexam.vercel.app/api/orders', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const rawData = response?.data;
@@ -44,7 +44,7 @@ const DashOrderListPage = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:8000/api/orders/${orderId}/status`, 
+        `https://alejandro-advwebprog-longexam.vercel.app/api/orders/${orderId}/status`, 
         { orderStatus: newStatus },
         {
           headers: {
