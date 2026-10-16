@@ -3,7 +3,16 @@ const { HttpStatus } = require("../config/constants");
 module.exports = (...roles) => {
   return async (request, response, next) => {
     try {
-      if (!roles.includes(request.user.role)) {
+      if (!request.user || !request.user.role) {
+        return response.status(HttpStatus.FORBIDDEN).json({
+          error: new Error("Access denied: No role found"),
+        });
+      }
+      
+      const userRole = request.user.role.toLowerCase();
+      const normalizedRoles = roles.map(role => role.toLowerCase());
+
+      if (!normalizedRoles.includes(userRole)) {
         return response.status(HttpStatus.FORBIDDEN).json({
           error: new Error("Access denied"),
         });
