@@ -1,3 +1,4 @@
+
 const { body, validationResult } = require('express-validator');
 
 const registerValidation = [
@@ -43,7 +44,11 @@ const registerValidation = [
 
     body('password')
         .isLength({ min: 6 })
-        .withMessage('Password must be at least 6 characters long'),
+        .withMessage('Password must be at least 6 characters long')
+        .matches(/[A-Z]/)
+        .withMessage('Password must contain at least one uppercase letter')
+        .matches(/[^A-Za-z0-9]/)
+        .withMessage('Password must contain at least one special symbol'),
 
     body('address')
         .isString()
