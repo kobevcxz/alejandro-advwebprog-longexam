@@ -63,7 +63,6 @@
           localStorage.setItem('user', JSON.stringify(userData));
         }
 
-        // Admin & Sellers route directly to DashProductListPage (/admin/products)
         if (userData.role === 'admin' || userData.role === 'seller') {
           navigate('/admin/products', { replace: true });
         } else {

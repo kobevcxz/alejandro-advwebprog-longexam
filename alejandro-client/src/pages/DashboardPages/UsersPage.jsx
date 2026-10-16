@@ -56,8 +56,11 @@ const UsersPage = () => {
   const [filterStatus, setFilterStatus] = useState("");
 
   useEffect(() => {
-    if (user?.role !== 'admin') {
-      navigate('/dashboard', { replace: true });
+    if (user !== undefined && user !== null) {
+      const userRole = (user.role || user.type || '').toLowerCase();
+      if (userRole !== 'admin') {
+        navigate('/admin/products', { replace: true });
+      }
     }
   }, [user, navigate]);
 
