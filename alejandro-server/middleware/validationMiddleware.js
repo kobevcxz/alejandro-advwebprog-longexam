@@ -32,8 +32,8 @@ const registerValidation = [
         .withMessage('Invalid email address'),
 
     body('role')
-        .isIn(['Admin', 'Seller', 'Buyer'])
-        .withMessage('Role must be Admin, Seller, or Buyer'),
+        .isIn(['Admin', 'Seller', 'buyer'])
+        .withMessage('Role must be Admin, Seller, or buyer'),
 
     body('username')
         .isString()

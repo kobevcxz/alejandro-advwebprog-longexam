@@ -22,7 +22,7 @@ const SignUpPage = () => {
     gender: '',
     contactNumber: '',
     address: '',
-    role: 'Buyer',
+    role: 'buyer',
   });
 
   const [error, setError] = useState('');
