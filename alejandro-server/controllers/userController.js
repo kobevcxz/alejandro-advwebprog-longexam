@@ -18,7 +18,8 @@ const getUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        const isAuthorizedAdmin = req.user.role === 'Admin';
+        const userRole = (req.user.role || '').toLowerCase();
+        const isAuthorizedAdmin = userRole === 'admin';
         const isSelf = req.user.id.toString() === req.params.id.toString();
 
         if (!isAuthorizedAdmin && !isSelf) {
@@ -79,8 +80,11 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const isAuthorizedAdmin = req.user.role === 'Admin';
-        const isSelfUpdate = req.user.id.toString() === req.params.id.toString();
+        const userRole = (req.user?.role || req.user?.type || '').toLowerCase();
+        const isAuthorizedAdmin = userRole === 'admin';
+        
+        const currentUserId = req.user?.id || req.user?._id;
+        const isSelfUpdate = currentUserId && currentUserId.toString() === req.params.id.toString();
 
         if (!isAuthorizedAdmin && !isSelfUpdate) {
             return res.status(HttpStatus.FORBIDDEN).json({
@@ -89,8 +93,10 @@ const updateUser = async (req, res) => {
             });
         }
 
-        if (req.body.password) {
+        if (req.body.password && req.body.password.trim() !== '') {
             req.body.password = await bcrypt.hash(req.body.password, 10);
+        } else {
+            delete req.body.password;
         }
 
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { 
